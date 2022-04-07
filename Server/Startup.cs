@@ -1,4 +1,6 @@
 using Microsoft.OpenApi.Models;
+using Server.Extensions;
+using Server.Middleware;
 
 namespace Server
 {
@@ -14,7 +16,7 @@ namespace Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddApplicationServices(_config);
+            services.AddApplicationServices(_config);
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
@@ -33,7 +35,7 @@ namespace Server
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
-            // app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseRouting();
