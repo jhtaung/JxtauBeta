@@ -1,6 +1,4 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using Server.DTOs;
 using Server.Helpers;
 using Server.Interfaces;
@@ -19,37 +17,46 @@ namespace Server.Data
         }
         public async Task<PageList<AppealListDto>> GetListAsync(AppealParams appealParams)
         {
-            var query = 
+             var query = 
                 from appeal in _context.Appeals
-                from log in _context.AppealStatusLogs
+                let status = _context.AppealStatusLogs
                     .Where(x => x.AppealId == appeal.AppealId)
-                    .OrderByDescending(x => x.AppealId)
-                    .Take(1)
-                    .DefaultIfEmpty()
-                from meeting in _context.MeetingSchedules
-                    .Where(x => x.MeetingScheduleId == log.MeetingScheduleId)
-                    .DefaultIfEmpty()
-                from plan in _context.PlanTypes
-                    .Where(x => x.PlanTypeId == appeal.PlanTypeId)
-                    .DefaultIfEmpty()
-                from department in _context.Departments
-                    .Where(x => x.DepartmentId == appeal.DepartmentId)
-                    .DefaultIfEmpty()
-                from contact in _context.AppealContacts
-                    .Where(x => x.ContactTypeId == 1)
-                    .Where(x => x.AppealId == appeal.AppealId)
-                    .DefaultIfEmpty()
-                from contactType in _context.ContactTypes
-                    .Where(x => x.ContactTypeId == contact.ContactTypeId)
-                    .DefaultIfEmpty()
-                select appeal;
-
+                    .OrderByDescending(x => x.AppealStatusLogId)
+                    .FirstOrDefault()
+                join statusType in _context.AppealStatusTypes
+                    on status.AppealStatusTypeId equals statusType.AppealStatusTypeId
+                join department in _context.Departments
+                    on appeal.DepartmentId equals department.DepartmentId
+                join meeting in _context.MeetingSchedules 
+                    on status.MeetingScheduleId equals meeting.MeetingScheduleId
+                join contacts in _context.AppealContacts.Where(x => x.ContactTypeId == 1)
+                    on appeal.AppealId equals contacts.AppealId into leftContacts
+                from contact in leftContacts.DefaultIfEmpty()
+                orderby appeal.AppealId descending
+                select new AppealListDto
+                {
+                    Id = appeal.AppealId,
+                    Rap = appeal.Rap,
+                    Dept = department.DepartmentCode,
+                    Mpid = appeal.Mpid,
+                    FirstName = contact.FirstName,
+                    LastName = contact.LastName,
+                    Meeting = (meeting.MeetingTime ?? meeting.MeetingDate),
+                    Status = statusType.AppealStatusTypeDescription,
+                    Notes = status.Notes,
+                    StatusUpdateUser = status.UpdateUser,
+                    StatusUpdateDate = status.UpdateDate,
+                    ReceivedDate = appeal.AppealReceivedDate
+                };
+            
             query = query.AsQueryable();
+            query = query.OrderByDescending(x => x.Id); 
 
-            query = query.OrderByDescending(x => x.AppealId);
+            var sortHelper = new SortHelper<AppealListDto>();
+            query = sortHelper.ApplySort(query, appealParams.OrderBy);
 
             return await PageList<AppealListDto>.CreateAsync(
-                query.ProjectTo<AppealListDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                query,
                 appealParams.PageNumber, 
                 appealParams.PageSize
             );

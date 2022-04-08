@@ -1,4 +1,5 @@
 using Server.DTOs;
+using Server.Entities;
 using Server.Helpers;
 using Server.Params;
 

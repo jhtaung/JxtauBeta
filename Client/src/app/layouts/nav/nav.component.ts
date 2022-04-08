@@ -13,7 +13,8 @@ import { map, shareReplay } from 'rxjs/operators';
 export class NavComponent implements OnInit {
   title: string = 'Jxtau Beta';
   menuItems = [
-    { key: '', name: 'Home' }
+    { key: '', name: 'Home' },
+    { key: 'appeals', name: 'Appeals' }
   ];
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
