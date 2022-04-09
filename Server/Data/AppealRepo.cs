@@ -43,7 +43,7 @@ namespace Server.Data
                     LastName = contact.LastName,
                     Meeting = (meeting.MeetingTime ?? meeting.MeetingDate),
                     Status = statusType.AppealStatusTypeDescription,
-                    Notes = status.Notes,
+                    Notes = status.Notes ?? "",
                     StatusUpdateUser = status.UpdateUser,
                     StatusUpdateDate = status.UpdateDate,
                     ReceivedDate = appeal.AppealReceivedDate
@@ -51,6 +51,9 @@ namespace Server.Data
             
             query = query.AsQueryable();
             query = query.OrderByDescending(x => x.Id); 
+
+            var searchHelper = new SearchHelper<AppealListDto>();
+            query = searchHelper.ApplySearch(query, appealParams.Search);
 
             var sortHelper = new SortHelper<AppealListDto>();
             query = sortHelper.ApplySort(query, appealParams.OrderBy);

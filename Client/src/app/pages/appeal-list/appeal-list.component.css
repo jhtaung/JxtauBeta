@@ -18,3 +18,12 @@ th.mat-sort-header-sorted {
 th.mat-header-cell {
   border-top: 1px solid #e0e0e0;
 }
+
+.jh-filter {
+  padding: 20px 0px 0px 20px;
+}
+
+.mat-paginator {
+  display: flex;
+  justify-content: left;
+} 

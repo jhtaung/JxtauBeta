@@ -25,6 +25,7 @@ export class AppealService {
   getAppealList(appealParams: AppealParams) {
     let params = getPageHeaders(appealParams.pageNumber, appealParams.pageSize);
     params = appealParams.orderBy == "" ? params : params.append('orderby', appealParams.orderBy);
+    params = appealParams.search == "" ? params : params.append('search', appealParams.search);
     return getPageResult<AppealList[]>(
       this.httpClient,
       this.baseUrl + 'Appeals/List',

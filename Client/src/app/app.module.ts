@@ -16,6 +16,8 @@ import { AppealListComponent } from './pages/appeal-list/appeal-list.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 import { TestErrorsComponent } from './pages/test-errors/test-errors.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
 
 @NgModule({
   declarations: [
@@ -26,17 +28,21 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     AppealListComponent,
     ServerErrorComponent,
     TestErrorsComponent,
+    HighlightSearchPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     MaterialModule,
     LayoutModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    HighlightSearchPipe,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

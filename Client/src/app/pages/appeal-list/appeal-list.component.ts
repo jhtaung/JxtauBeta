@@ -14,9 +14,10 @@ import { AppealService } from 'src/app/services/appeal.service';
 export class AppealListComponent implements OnInit {
   isLoading = false;
   orderBy = "";
+  search: string = "";
   totalRows = 0;
   pageSize = 10;
-  currentPage = 1;
+  currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
   displayedColumns: string[] = [];
@@ -62,9 +63,13 @@ export class AppealListComponent implements OnInit {
 
   load() {
     this.isLoading = true;
-    this.appealParams.pageNumber = this.currentPage;
+    this.appealParams.pageNumber = this.currentPage + 1;
     this.appealParams.pageSize = this.pageSize;
     this.appealParams.orderBy = this.orderBy;
+    this.appealParams.search = this.search;
+
+    console.log(this.appealParams);
+
     this.appealService.setAppealParams(this.appealParams);
     this.appealService.getAppealList(this.appealParams).subscribe({
       next: response => {
@@ -83,14 +88,18 @@ export class AppealListComponent implements OnInit {
   }
 
   pageChanged(event: PageEvent) {
-    this.currentPage = event.pageIndex + 1;
+    this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     this.load();
   }
 
   doSort(event: any) {
-    this.currentPage = this.appealParams.pageNumber;
     this.orderBy = event.active + "+" + event.direction;
+    this.load();
+  }
+
+  doFilter() {
+    this.currentPage = 0;
     this.load();
   }
 }

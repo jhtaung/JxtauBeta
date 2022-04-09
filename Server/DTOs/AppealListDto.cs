@@ -10,7 +10,7 @@ namespace Server.DTOs
         public string? LastName { get; set; }
         public DateTime? Meeting { get; set; }
         public string? Status { get; set; }
-        public string? Notes { get; set; }
+        public string Notes { get; set; } = "";
         public string? StatusUpdateUser { get; set; }
         public DateTime? StatusUpdateDate { get; set; }
         public DateTime? ReceivedDate { get; set; }
