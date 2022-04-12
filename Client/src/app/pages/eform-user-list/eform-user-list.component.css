@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  th {
+    width: 20%;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    font-size: 14px;
+    min-height: 48px;
+    padding: 0px 10px;
+    text-align: left;
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  th.mat-header-cell, .mat-cell {
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .jh-paper {
+    margin-bottom: 20px;
+  }
+  
+  .jh-paper .mat-h3 {
+    padding: 15px 0px 0px 10px;
+  }
+  

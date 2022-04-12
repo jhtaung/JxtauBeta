@@ -14,7 +14,8 @@ export class NavComponent implements OnInit {
   title: string = 'Jxtau Beta';
   menuItems = [
     { key: '', name: 'Home' },
-    { key: 'appeals', name: 'Appeals' }
+    { key: 'appeals', name: 'Appeals' },
+    { key: 'eform-users', name: 'Eforms' }
   ];
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)

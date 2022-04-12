@@ -18,6 +18,7 @@ import { TestErrorsComponent } from './pages/test-errors/test-errors.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
+import { EformUserListComponent } from './pages/eform-user-list/eform-user-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
     AppealListComponent,
     ServerErrorComponent,
     TestErrorsComponent,
-    HighlightSearchPipe
+    HighlightSearchPipe,
+    EformUserListComponent
   ],
   imports: [
     BrowserModule,
