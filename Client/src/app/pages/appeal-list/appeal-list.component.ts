@@ -15,6 +15,7 @@ export class AppealListComponent implements OnInit {
   isLoading = false;
   orderBy = "";
   search: string = "";
+  searchAfter: string = "";
   totalRows = 0;
   pageSize = 10;
   currentPage = 0;
@@ -39,12 +40,8 @@ export class AppealListComponent implements OnInit {
 
   appealParams: AppealParams;
   dataSource: MatTableDataSource<AppealList> = new MatTableDataSource();
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  @ViewChild(MatSort) 
-  sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private appealService: AppealService) {
     this.appealParams = this.appealService.getAppealParams();
@@ -68,8 +65,6 @@ export class AppealListComponent implements OnInit {
     this.appealParams.orderBy = this.orderBy;
     this.appealParams.search = this.search;
 
-    console.log(this.appealParams);
-
     this.appealService.setAppealParams(this.appealParams);
     this.appealService.getAppealList(this.appealParams).subscribe({
       next: response => {
@@ -77,6 +72,7 @@ export class AppealListComponent implements OnInit {
         this.dataSource.data = response.result;
         this.currentPage = response.page.currentPage - 1;
         this.totalRows = response.page.totalItems;
+        this.searchAfter = this.search;
       },
       error: error => {
         console.log(error);

@@ -12,11 +12,7 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavComponent implements OnInit {
   title: string = 'Jxtau Beta';
-  menuItems = [
-    { key: '', name: 'Home' },
-    { key: 'appeals', name: 'Appeals' },
-    { key: 'eform-users', name: 'Eforms' }
-  ];
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -28,9 +24,9 @@ export class NavComponent implements OnInit {
   // user!: User;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    // private accountService: AccountService
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) // private accountService: AccountService
+  {}
 
   ngOnInit(): void {
     // this.load();

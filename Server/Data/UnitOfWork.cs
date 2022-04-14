@@ -14,6 +14,7 @@ namespace Server.Data
             _mapper = mapper;
             _context = context;
         }
+        public IAddressRepo AddressRepo => new AddressRepo(_httpClient);
         public IAppealRepo AppealRepo => new AppealRepo(_context, _mapper);
         public IEformRepo EformRepo => new EformRepo(_httpClient);
         public async Task<bool> Complete()

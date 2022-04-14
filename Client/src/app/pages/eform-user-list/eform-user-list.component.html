@@ -15,6 +15,11 @@
             <span *ngIf="column.attr == 'date'">
               {{data[column.key] | date: 'yyyy-MM-dd h:mm a'}}
             </span>
+            <span *ngIf="column.attr == 'actions'">
+              <a mat-raised-button color="primary" [routerLink]="['/eform/users/', data.id]">
+                View
+              </a>
+            </span>
           </td>
         </ng-container>
   

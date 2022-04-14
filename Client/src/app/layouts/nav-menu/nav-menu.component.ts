@@ -1,0 +1,57 @@
+import { Component, OnInit } from '@angular/core';
+
+interface IMenu {
+  text: string;
+  icon: string;
+  routerLink?: string;
+  children?: IMenuItem[];
+}
+
+interface IMenuItem {
+  text: string;
+  icon: string;
+  routerLink: string;
+}
+
+@Component({
+  selector: 'app-nav-menu',
+  templateUrl: './nav-menu.component.html',
+  styleUrls: ['./nav-menu.component.css']
+})
+export class NavMenuComponent implements OnInit {
+  menuList: IMenu[] = [
+    {
+      text: 'Home',
+      icon: 'home',
+      routerLink: '/',
+    },
+    {
+      text: 'BAC',
+      icon: 'folder',
+      children: [
+        {
+          text: 'Appeals',
+          icon: 'list',
+          routerLink: '/bac/appeals',
+        },
+      ],
+    },
+    {
+      text: 'Eform',
+      icon: 'folder',
+      children: [
+        {
+          text: 'Users',
+          icon: 'list',
+          routerLink: '/eform/users',
+        },
+      ],
+    }
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

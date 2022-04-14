@@ -18,6 +18,7 @@ export class EformUserListComponent implements OnInit {
 
   displayedColumns: string[] = [];
   columns = [
+    { key: 'actions', name: 'Actions', attr: 'actions' },
     { key: 'id', name: 'ID', attr: 'string' },
     { key: 'username', name: 'User Name', attr: 'string' },
     { key: 'firstName', name: 'First Name', attr: 'string' },

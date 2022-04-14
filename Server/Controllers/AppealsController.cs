@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.DTOs;
-using Server.Entities;
 using Server.Extensions;
 using Server.Interfaces;
 using Server.Params;

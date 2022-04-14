@@ -6,10 +6,6 @@ table {
     color: black;
   }
   
-  th {
-    width: 20%;
-  }
-  
   .mat-header-cell, .mat-cell {
     font-size: 14px;
     min-height: 48px;
@@ -20,6 +16,30 @@ table {
   
   th.mat-header-cell, .mat-cell {
     border-top: 1px solid #e0e0e0;
+  }
+
+  .mat-column-actions {
+    width: 77px;
+  }
+/* 
+  .mat-column-id {
+    width: 300px;
+  } 
+*/
+  .mat-column-username {
+    width: 300px;
+  }
+
+  .mat-column-firstName {
+    width: 300px;
+  }
+
+  .mat-column-lastName {
+    width: 300px;
+  }
+
+  .mat-column-disabled {
+    width: 100px;
   }
   
   .jh-paper {

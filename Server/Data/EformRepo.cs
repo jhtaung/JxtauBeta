@@ -1,6 +1,6 @@
 using Microsoft.Net.Http.Headers;
 using Server.Interfaces;
-using Server.Models;
+using Server.DTOs;
 
 namespace Server.Data
 {
@@ -39,6 +39,12 @@ namespace Server.Data
                     NextLink = eformUsers.NextLink
                 };
             });
+        }
+
+        public async Task<EformUserDto> GetUserAsync(string id)
+        {
+            var eformUser = await _httpClient.GetFromJsonAsync<EformUserDto>("manage/api/v1/admin/users/" + id);
+            return eformUser!;
         }
     }
 }
