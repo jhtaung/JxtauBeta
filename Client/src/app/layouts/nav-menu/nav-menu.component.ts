@@ -26,6 +26,11 @@ export class NavMenuComponent implements OnInit {
       routerLink: '/',
     },
     {
+      text: 'Account',
+      icon: 'account_circle',
+      routerLink: '/account',
+    },
+    {
       text: 'BAC',
       icon: 'folder',
       children: [
@@ -44,6 +49,11 @@ export class NavMenuComponent implements OnInit {
           text: 'Users',
           icon: 'list',
           routerLink: '/eform/users',
+        },
+        {
+          text: 'USPS Address',
+          icon: 'pin_drop',
+          routerLink: '/eform/usps/address',
         },
       ],
     }

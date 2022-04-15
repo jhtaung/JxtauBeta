@@ -16,30 +16,26 @@ interface JxRowDto {
 @Component({
   selector: 'app-eform-user-detail',
   templateUrl: './eform-user-detail.component.html',
-  styleUrls: ['./eform-user-detail.component.css']
+  styleUrls: ['./eform-user-detail.component.css'],
 })
 export class EformUserDetailComponent implements OnInit {
   id: string = '';
-  error: string = "";
-
+  error: string = '';
   isLoading = false;
+
   pageSize = 50;
   pageSizeOptions: number[] = [10, 25, 50, 100];
-
-  displayedColumns: string[] = [];
-  columns = [
-    { key: 'key', name: 'Key', attr: 'string' },
-    { key: 'value', name: 'Value', attr: 'string' },
-  ];
-
+  displayedColumns: string[] = ['key', 'value'];
   dataSource: MatTableDataSource<JxRowDto> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private route: ActivatedRoute, private eformService: EformService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private eformService: EformService
+  ) {}
 
   ngOnInit(): void {
-    this.setTable();
     this.load();
   }
 
@@ -48,30 +44,23 @@ export class EformUserDetailComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  setTable() {
-    for (var col of this.columns) {
-      this.displayedColumns.push(col.key);
-    }
-  }
-
   load() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.eformService.getUser(this.id).subscribe({
-        next: response => {
-          // console.log('success', response);
+        next: (response) => {
           this.isLoading = true;
           this.dataSource.data = this.parse(response);
         },
-        error: error => {
+        error: (error) => {
           console.log('error', error);
           this.error = 'error loading page. view console.';
         },
         complete: () => {
           this.isLoading = false;
-        }
+        },
       });
-    })
+    });
   }
 
   parse(data: EformUserDetailDto): JxRowDto[] {
@@ -79,12 +68,13 @@ export class EformUserDetailComponent implements OnInit {
     const entiries = Object.entries(data);
     for (const [k, v] of entiries) {
       const str = k.toString();
-      const res = str.replace(/([A-Z])/g, " $1");
+      const res = str.replace(/([A-Z])/g, ' $1');
       const fin = res.charAt(0).toUpperCase() + res.slice(1);
       var key = fin;
       var value = v;
-      switch (typeof(v)) {
-        case 'string': break;
+      switch (typeof v) {
+        case 'string':
+          break;
         case 'boolean':
           value = v ? 'true' : 'false';
           break;
@@ -107,5 +97,4 @@ export class EformUserDetailComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

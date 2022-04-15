@@ -39,12 +39,12 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.snackBar.open(error.error === null ? 'Unauthorised' : error.error, error.status);
               break;
             case 404:
-              this.router.navigateByUrl('/not-found');
+              this.router.navigateByUrl('error/not-found');
               break;
             case 500:
               console.log('500');
               const navigationExtras: NavigationExtras = {state: {error: error.error}};
-              this.router.navigateByUrl('/server-error', navigationExtras);
+              this.router.navigateByUrl('error/server', navigationExtras);
               break;
             default:
               this.snackBar.open('Something unexpected went wrong', 'x');

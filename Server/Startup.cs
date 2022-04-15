@@ -41,11 +41,11 @@ namespace Server
             app.UseRouting();
 
             app.UseCors(x => x
-                .AllowAnyOrigin()
+                // .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                // .AllowCredentials()
-                // .WithOrigins("https://localhost:4200", "https://hondaati1.mpidom.mpi")
+                .AllowCredentials()
+                .WithOrigins("https://localhost:4200")
             );
 
             app.UseAuthentication();

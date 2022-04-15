@@ -1,5 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">Eform Users</h1>
+  <div *ngIf="error.trim() !== ''">{{error}}</div>
   <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Justin" #input>

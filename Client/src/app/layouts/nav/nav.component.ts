@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-// import { AccountService } from 'src/app/core/services/account.service';
-// import { User } from 'src/app/shared/models/user';
+import { AccountService } from 'src/app/services/account.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-nav',
@@ -21,18 +21,17 @@ export class NavComponent implements OnInit {
     );
 
   isLoggedIn: boolean = false;
-  // user!: User;
+  user!: User;
 
   constructor(
-    private breakpointObserver: BreakpointObserver
-  ) // private accountService: AccountService
-  {}
+    private breakpointObserver: BreakpointObserver,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
-    // this.load();
+    this.load();
   }
 
-  /*
   load() {
     var user = this.accountService.getCurrentUser();
     if (user) {
@@ -46,8 +45,7 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login().subscribe({
-      next: (response) => {
-        console.log('user', response);
+      next: () => {
         this.load();
         return true;
       },
@@ -57,5 +55,4 @@ export class NavComponent implements OnInit {
       },
     });
   }
-  */
 }

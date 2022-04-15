@@ -25,7 +25,16 @@
         <span>{{ title }}</span>
       </div>
       <span class="flexExpand"></span>
-      <div>Welcome</div>
+      <div>
+        <div *ngIf="isLoggedIn; else loggedOut" class="jh-user">
+          Welcome {{user.name}}
+        </div>
+        <ng-template #loggedOut>
+          <button type="button" mat-icon-button (click)="login()">
+            Login
+          </button>
+        </ng-template>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

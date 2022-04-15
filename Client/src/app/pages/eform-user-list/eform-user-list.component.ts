@@ -67,9 +67,6 @@ export class EformUserListComponent implements OnInit {
     this.isLoading = true;
     this.eformService.getUserList().subscribe({
       next: response => {
-        console.log('response', response);
-        var data = response.data!;
-
         var devs: string[] = [
           'admin',
           'jhtaung',
@@ -78,10 +75,10 @@ export class EformUserListComponent implements OnInit {
           'mwhelpley',
           'tmazumder'
         ];
-
         var devUserList: EformUserDto[] = [];
         var userList: EformUserDto[] = [];
 
+        var data = response.data!;
         for (var i = 0; i < data.length; i++) {
           var user = data[i];
           if (devs.includes(user.username)) {

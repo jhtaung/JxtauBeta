@@ -27,3 +27,7 @@ th.mat-header-cell {
   display: flex;
   justify-content: left;
 } 
+
+.empty-dataset__hidden{
+  display: none;
+}
