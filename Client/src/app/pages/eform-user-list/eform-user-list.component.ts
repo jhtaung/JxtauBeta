@@ -75,7 +75,7 @@ export class EformUserListComponent implements OnInit {
   load() {
     this.isLoading = true;
     this.eformService.getUserList().subscribe({
-      next: (response) => {
+      next: response => {
         var devs: string[] = [
           'admin',
           'jhtaung',
@@ -103,7 +103,7 @@ export class EformUserListComponent implements OnInit {
 
         // this.deleteUsers();
       },
-      error: (error) => {
+      error: error => {
         console.log('error', error);
       },
       complete: () => {
@@ -118,7 +118,7 @@ export class EformUserListComponent implements OnInit {
     var countdown = 5;
     for (var i = 0; i < countdown; i++) {
       this.log += countdown - i + '\n';
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       if (this.cancel) {
         return;
       }
@@ -145,7 +145,7 @@ export class EformUserListComponent implements OnInit {
       this.dataSources[1].dataSource.data[i].log = 'deleting user...';
       this.log += 'deleting user: ' + user.username + '...';
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const response$ = this.eformService.getUser(user.id);
       const response = await lastValueFrom(response$);
       console.log(response);
@@ -165,7 +165,7 @@ export class EformUserListComponent implements OnInit {
     this.log += 'refreshing page in \n';
     for (var i = 0; i < countdown; i++) {
       this.log += countdown - i + '\n';
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       if (this.cancel) {
         return;
       }

@@ -45,14 +45,14 @@ export class EformUserDetailComponent implements OnInit {
   }
 
   load() {
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(params => {
       this.id = params['id'];
       this.eformService.getUser(this.id).subscribe({
-        next: (response) => {
+        next: response => {
           this.isLoading = true;
           this.dataSource.data = this.parse(response);
         },
-        error: (error) => {
+        error: error => {
           console.log('error', error);
           this.error = 'error loading page. view console.';
         },

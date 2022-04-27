@@ -2,8 +2,7 @@
   <ng-container *ngFor="let menu of menuList; index as i">
     <ng-container
       [ngTemplateOutlet]="menu.children ? childMenu : parentMenu"
-      [ngTemplateOutletContext]="{ menu: menu }"
-    >
+      [ngTemplateOutletContext]="{ menu: menu }">
     </ng-container>
   </ng-container>
 </mat-nav-list>
@@ -12,8 +11,7 @@
   <mat-list-item
     [routerLink]="menu.routerLink"
     routerLinkActive="is-active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
+    [routerLinkActiveOptions]="{ exact: true }">
     <mat-icon>{{ menu.icon }}</mat-icon> {{ menu.text }}
   </mat-list-item>
 </ng-template>
@@ -29,8 +27,7 @@
         [routerLink]="submenu.routerLink"
         *ngFor="let submenu of menu.children"
         routerLinkActive="is-active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>{{ submenu.icon }}</mat-icon> {{ submenu.text }}
       </mat-list-item>
     </mat-nav-list>

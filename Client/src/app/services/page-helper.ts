@@ -9,7 +9,7 @@ export function getPageResult<T>(
 ) {
   const pageResult: PageResult<T> = new PageResult<T>();
   return http.get<T>(url, { observe: 'response', params }).pipe(
-    map((response) => {
+    map(response => {
       pageResult.result = response.body!;
       if (response.headers.get('Pagination') !== null) {
         pageResult.page = JSON.parse(response.headers.get('Pagination')!);

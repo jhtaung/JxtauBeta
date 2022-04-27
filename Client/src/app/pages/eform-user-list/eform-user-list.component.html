@@ -15,14 +15,13 @@
             {{ data[column.key] }}
           </span>
           <span *ngIf="column.attr === 'date'">
-            {{ data[column.key] | date: "yyyy-MM-dd h:mm a" }}
+            {{ data[column.key] | date: 'yyyy-MM-dd h:mm a' }}
           </span>
           <span *ngIf="column.attr === 'actions'">
             <a
               mat-raised-button
               color="primary"
-              [routerLink]="['/eform/users/', data.id]"
-            >
+              [routerLink]="['/eform/users/', data.id]">
               View
             </a>
           </span>
@@ -36,8 +35,7 @@
     <mat-paginator
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"
-      showFirstLastButtons
-    >
+      showFirstLastButtons>
     </mat-paginator>
   </div>
 
@@ -48,8 +46,7 @@
     <button
       mat-raised-button
       (click)="cancelProcess()"
-      style="margin: 0px 10px"
-    >
+      style="margin: 0px 10px">
       Cancel
     </button>
     <mat-divider class="jh-divider"></mat-divider>

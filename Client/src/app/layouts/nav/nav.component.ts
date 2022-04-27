@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
-      map((result) => result.matches),
+      map(result => result.matches),
       shareReplay()
     );
 
@@ -49,7 +49,7 @@ export class NavComponent implements OnInit {
         this.load();
         return true;
       },
-      error: (error) => {
+      error: error => {
         console.log('error', error);
         return false;
       },

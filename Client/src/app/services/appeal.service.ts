@@ -37,8 +37,8 @@ export class AppealService {
       this.baseUrl + 'Appeals/List',
       params
     ).pipe(
-      map((response) => {
-        response.result.map((x) => {
+      map(response => {
+        response.result.map(x => {
           x.meeting = new Date(x.meeting);
           return x;
         });

@@ -67,14 +67,14 @@ export class AppealListComponent implements OnInit {
 
     this.appealService.setAppealParams(this.appealParams);
     this.appealService.getAppealList(this.appealParams).subscribe({
-      next: (response) => {
+      next: response => {
         console.log('response', response);
         this.dataSource.data = response.result;
         this.currentPage = response.page.currentPage - 1;
         this.totalRows = response.page.totalItems;
         this.searchAfter = this.search;
       },
-      error: (error) => {
+      error: error => {
         console.log(error);
       },
       complete: () => {

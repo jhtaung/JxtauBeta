@@ -7,8 +7,7 @@
       matInput
       (keyup)="applyFilter($event)"
       placeholder="Ex. Justin"
-      #input
-    />
+      #input />
   </mat-form-field>
   <div class="jh-paper mat-elevation-z8">
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
@@ -37,8 +36,7 @@
     <mat-paginator
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"
-      showFirstLastButtons
-    >
+      showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>

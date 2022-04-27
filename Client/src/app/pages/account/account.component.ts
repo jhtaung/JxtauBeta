@@ -44,7 +44,7 @@ export class AccountComponent implements OnInit {
 
   load() {
     this.accountService.getGroupList().subscribe({
-      next: (response) => {
+      next: response => {
         // console.log(response);
         var result: JxRowDto[] = [];
         for (const i in response) {
@@ -53,7 +53,7 @@ export class AccountComponent implements OnInit {
         this.dataSource.data = result;
         this.dataSource2.data = result;
       },
-      error: (error) => {
+      error: error => {
         console.log('error', error);
       },
       complete: () => {},
