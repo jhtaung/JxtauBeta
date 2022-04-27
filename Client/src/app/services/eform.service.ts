@@ -5,18 +5,20 @@ import { EformUserDetailDto } from '../models/eform-user-detail';
 import { EformResponse } from '../models/eform-user-list';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EformService {
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
-  
-  getUserList () {
-    return this.http.get<EformResponse>(this.baseUrl + "Eforms/Users/List");
+  constructor(private http: HttpClient) {}
+
+  getUserList() {
+    return this.http.get<EformResponse>(this.baseUrl + 'Eforms/Users/List');
   }
 
   getUser(id: string) {
-    return this.http.get<EformUserDetailDto>(this.baseUrl + "Eforms/Users/" + id);
+    return this.http.get<EformUserDetailDto>(
+      this.baseUrl + 'Eforms/Users/' + id
+    );
   }
 }

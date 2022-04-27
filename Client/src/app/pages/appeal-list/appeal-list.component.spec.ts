@@ -8,9 +8,8 @@ describe('AppealListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppealListComponent ]
-    })
-    .compileComponents();
+      declarations: [AppealListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

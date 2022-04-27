@@ -26,5 +26,19 @@ namespace Server.Controllers
             var eformUser = await _unitOfWork.EformRepo.GetUserAsync(id);
             return Ok(eformUser);
         }
+
+        [HttpDelete("Users/{id}")]
+        public async Task<ActionResult<string>> DeleteUser(string id)
+        {
+            var eformUser = await _unitOfWork.EformRepo.DeleteUserAsync(id);
+            return Ok(eformUser);
+        }
+
+        [HttpGet("Docs")]
+        public async Task<ActionResult<List<EformDocDto>>> GetAxDocs()
+        {
+            var axDocs = await _unitOfWork.EformRepo.GetDocs();
+            return Ok(axDocs);
+        }
     }
 }

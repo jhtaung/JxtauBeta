@@ -35,6 +35,6 @@ export class AccountService {
   }
 
   getGroupList() {
-    return this.http.get<string[]>(this.baseUrl + "Users/Self/Groups/List");
+    return this.http.get<string[]>(this.baseUrl + 'Users/Self/Groups/List');
   }
 }

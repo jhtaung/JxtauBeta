@@ -8,9 +8,8 @@ describe('EformUserDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EformUserDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [EformUserDetailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

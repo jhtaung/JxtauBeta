@@ -26,8 +26,8 @@ th.mat-header-cell {
 .mat-paginator {
   display: flex;
   justify-content: left;
-} 
+}
 
-.empty-dataset__hidden{
+.empty-dataset__hidden {
   display: none;
 }

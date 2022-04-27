@@ -22,21 +22,23 @@ import { EformUserListComponent } from './pages/eform-user-list/eform-user-list.
 import { NavMenuComponent } from './layouts/nav-menu/nav-menu.component';
 import { EformUserDetailComponent } from './pages/eform-user-detail/eform-user-detail.component';
 import { AccountComponent } from './pages/account/account.component';
+import { EformDocListComponent } from './pages/eform-doc-list/eform-doc-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HighlightSearchPipe,
     NavComponent,
     NotFoundComponent,
-    HomeComponent,
-    AppealListComponent,
+    NavMenuComponent,
+    AccountComponent,
     ServerErrorComponent,
     TestErrorsComponent,
-    HighlightSearchPipe,
+    HomeComponent,
+    AppealListComponent,
     EformUserListComponent,
-    NavMenuComponent,
     EformUserDetailComponent,
-    AccountComponent
+    EformDocListComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +52,8 @@ import { AccountComponent } from './pages/account/account.component';
   ],
   providers: [
     HighlightSearchPipe,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

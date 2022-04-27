@@ -9,4 +9,5 @@ export interface EformUserDto {
   firstName: string;
   lastName: string;
   disabled: boolean;
+  log: string;
 }

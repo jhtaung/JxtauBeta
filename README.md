@@ -30,6 +30,10 @@ Angular - new project
 - ng g interceptor _interceptors/loading
 - ng g guard _guards/auth
 
+Angular - Prettier
+- ng add @angular-eslint/schematics
+- ng lint --fix
+
 Angular - resources
 - http://json2ts.com/
 

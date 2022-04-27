@@ -9,13 +9,13 @@ import { AppealService } from 'src/app/services/appeal.service';
 @Component({
   selector: 'app-appeal-list',
   templateUrl: './appeal-list.component.html',
-  styleUrls: ['./appeal-list.component.css']
+  styleUrls: ['./appeal-list.component.css'],
 })
 export class AppealListComponent implements OnInit {
   isLoading = false;
-  orderBy = "";
-  search: string = "";
-  searchAfter: string = "";
+  orderBy = '';
+  search: string = '';
+  searchAfter: string = '';
   totalRows = 0;
   pageSize = 10;
   currentPage = 0;
@@ -67,19 +67,19 @@ export class AppealListComponent implements OnInit {
 
     this.appealService.setAppealParams(this.appealParams);
     this.appealService.getAppealList(this.appealParams).subscribe({
-      next: response => {
+      next: (response) => {
         console.log('response', response);
         this.dataSource.data = response.result;
         this.currentPage = response.page.currentPage - 1;
         this.totalRows = response.page.totalItems;
         this.searchAfter = this.search;
       },
-      error: error => {
+      error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -90,7 +90,7 @@ export class AppealListComponent implements OnInit {
   }
 
   doSort(event: any) {
-    this.orderBy = event.active + "+" + event.direction;
+    this.orderBy = event.active + '+' + event.direction;
     this.load();
   }
 

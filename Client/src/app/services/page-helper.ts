@@ -5,16 +5,14 @@ import { PageResult } from '../models/page-params';
 export function getPageResult<T>(
   http: HttpClient,
   url: string,
-  params: HttpParams,
+  params: HttpParams
 ) {
   const pageResult: PageResult<T> = new PageResult<T>();
   return http.get<T>(url, { observe: 'response', params }).pipe(
     map((response) => {
-        pageResult.result = response.body!;
+      pageResult.result = response.body!;
       if (response.headers.get('Pagination') !== null) {
-        pageResult.page = JSON.parse(
-          response.headers.get('Pagination')!
-        );
+        pageResult.page = JSON.parse(response.headers.get('Pagination')!);
       }
       return pageResult;
     })
