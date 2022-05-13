@@ -44,26 +44,48 @@ namespace Server.Data
 
         public async Task<EformUserDto> GetUserAsync(string id)
         {
-            var eformUser = await _httpClient.GetFromJsonAsync<EformUserDto>("manage/api/v1/admin/users/" + id);
+            var eformUser = new EformUserDto();
+            try
+            {
+                eformUser = await _httpClient.GetFromJsonAsync<EformUserDto>("manage/api/v1/admin/users/" + id);
+            }
+            catch
+            {
+                eformUser = null;
+            }
             return eformUser!;
         }
 
-        public async Task<string> DeleteUserAsync(string id)
+        public async Task<EformUserDeleteDto> DeleteUserAsync(string id)
         {
+            var eformUser = await GetUserAsync(id);
+            if (eformUser == null)
+            {
+                return new EformUserDeleteDto
+                {
+                    IsSuccess = false,
+                    Message = "cannot find user with id. " + id,
+                    EformUser = null
+                };
+            }
+
             var url = "manage/api/v1/admin/users/" + id;
-            var eformUser = await _httpClient.GetFromJsonAsync<EformUserDto>(url);
-
-            if (eformUser == null) {
-                return "cannot find user with id. " + id;
-            }
-
             var response = await _httpClient.DeleteAsync(url);
-
-            if (response.IsSuccessStatusCode) {
-                return "deleted user with id. " + id;
+            if (response.IsSuccessStatusCode)
+            {
+                return new EformUserDeleteDto
+                {
+                    IsSuccess = true,
+                    Message = "deleted user with id. " + id,
+                    EformUser = eformUser
+                };
             }
-
-            return "failed to delete user with id. " + id;
+            return new EformUserDeleteDto
+            {
+                IsSuccess = false,
+                Message = "failed to delete user with id. " + id,
+                EformUser = eformUser
+            };
         }
 
         public async Task<List<EformDocDto>> GetDocs()

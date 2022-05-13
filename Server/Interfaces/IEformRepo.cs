@@ -6,8 +6,7 @@ namespace Server.Interfaces
     {
         Task<EformResponse>GetUserListAsync();
         Task<EformUserDto>GetUserAsync(string id);
-        Task<string>DeleteUserAsync(string id);
+        Task<EformUserDeleteDto>DeleteUserAsync(string id);
         Task<List<EformDocDto>>GetDocs();
-        
     }
 }

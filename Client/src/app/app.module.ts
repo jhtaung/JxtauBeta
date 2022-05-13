@@ -23,6 +23,7 @@ import { NavMenuComponent } from './layouts/nav-menu/nav-menu.component';
 import { EformUserDetailComponent } from './pages/eform-user-detail/eform-user-detail.component';
 import { AccountComponent } from './pages/account/account.component';
 import { EformDocListComponent } from './pages/eform-doc-list/eform-doc-list.component';
+import { EformUspsAddressComponent } from './pages/eform-usps-address/eform-usps-address.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { EformDocListComponent } from './pages/eform-doc-list/eform-doc-list.com
     EformUserListComponent,
     EformUserDetailComponent,
     EformDocListComponent,
+    EformUspsAddressComponent,
   ],
   imports: [
     BrowserModule,

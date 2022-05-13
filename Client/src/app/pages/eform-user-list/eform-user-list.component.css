@@ -54,6 +54,7 @@ th.mat-header-cell,
 
 .jh-paper-2 {
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 .jh-divider {
@@ -62,4 +63,8 @@ th.mat-header-cell,
 
 .jh-log {
   white-space: pre;
+  height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }

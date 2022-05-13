@@ -28,10 +28,10 @@ namespace Server.Controllers
         }
 
         [HttpDelete("Users/{id}")]
-        public async Task<ActionResult<string>> DeleteUser(string id)
+        public async Task<ActionResult<EformUserDeleteDto>> DeleteUser(string id)
         {
-            var eformUser = await _unitOfWork.EformRepo.DeleteUserAsync(id);
-            return Ok(eformUser);
+            var eformUserDeleteDto = await _unitOfWork.EformRepo.DeleteUserAsync(id);
+            return eformUserDeleteDto.IsSuccess ? Ok(eformUserDeleteDto) : BadRequest(eformUserDeleteDto);
         }
 
         [HttpGet("Docs")]

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,7 @@ interface JxRowDto {
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, AfterViewInit {
   error: string = '';
   isLoading = false;
   pageSize = 50;
@@ -43,9 +43,9 @@ export class AccountComponent implements OnInit {
   }
 
   load() {
+    this.isLoading = true;
     this.accountService.getGroupList().subscribe({
       next: response => {
-        // console.log(response);
         var result: JxRowDto[] = [];
         for (const i in response) {
           result.push({ name: response[i] });
@@ -56,7 +56,9 @@ export class AccountComponent implements OnInit {
       error: error => {
         console.log('error', error);
       },
-      complete: () => {},
+      complete: () => {
+        this.isLoading = false;
+      },
     });
   }
 

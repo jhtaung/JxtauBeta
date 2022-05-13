@@ -9,6 +9,7 @@ import { AccountComponent } from './pages/account/account.component';
 import { AppealListComponent } from './pages/appeal-list/appeal-list.component';
 import { EformUserListComponent } from './pages/eform-user-list/eform-user-list.component';
 import { EformUserDetailComponent } from './pages/eform-user-detail/eform-user-detail.component';
+import { EformUspsAddressComponent } from './pages/eform-usps-address/eform-usps-address.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'bac/appeals', component: AppealListComponent },
   { path: 'eform/users', component: EformUserListComponent },
   { path: 'eform/users/:id', component: EformUserDetailComponent },
+  { path: 'eform/usps/address', component: EformUspsAddressComponent },
   { path: 'error/test', component: TestErrorsComponent },
   { path: 'error/not-found', component: NotFoundComponent },
   { path: 'error/server', component: ServerErrorComponent },

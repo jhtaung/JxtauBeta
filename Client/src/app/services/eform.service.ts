@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Address } from '../models/address';
 import { EformUserDetailDto } from '../models/eform-user-detail';
 import { EformResponse } from '../models/eform-user-list';
 
@@ -17,8 +18,14 @@ export class EformService {
   }
 
   getUser(id: string) {
-    return this.http.get<EformUserDetailDto>(
-      this.baseUrl + 'Eforms/Users/' + id
-    );
+    return this.http.get<EformUserDetailDto>(this.baseUrl + 'Eforms/Users/' + id);
+  }
+
+  deleteUser(id: string) {
+    return this.http.delete<any>(this.baseUrl + 'Eforms/Users/' + id);
+  }
+
+  getAddress(address: Address) {
+    return this.http.post<Address>(this.baseUrl + 'Address/Validate', address);
   }
 }
