@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Interfaces;
 using Server.DTOs;
+using Server.Entities;
+using Server.Helpers;
+using Server.Params;
+using Server.Extensions;
 
 namespace Server.Controllers
 {
@@ -11,6 +15,14 @@ namespace Server.Controllers
         public EformsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet("List")]
+        public async Task<ActionResult<PageList<EformDto>>> GetEform([FromQuery]PageParams pageParams)
+        {
+            var eforms = await _unitOfWork.EformRepo.GetEformListAsync(pageParams);
+            Response.AddPageHeader(eforms.CurrentPage, eforms.PageSize, eforms.TotalCount, eforms.TotalPages);
+            return Ok(eforms);
         }
 
         [HttpGet("Users/List")]

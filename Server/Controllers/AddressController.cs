@@ -19,6 +19,12 @@ namespace Server.Controllers
         {
             return await _unitOfWork.AddressRepo.GetAddressAsync(addressParams);
         }
+
+        [HttpPost("ValidateZip")]
+        public async Task<ActionResult<AddressZipDto>> GetAddressZip(AddressZipParams addressZipParams)
+        {
+            return await _unitOfWork.AddressRepo.GetAddressZipAsync(addressZipParams);
+        }
     }
 
 

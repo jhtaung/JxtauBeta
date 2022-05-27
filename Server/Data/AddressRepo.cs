@@ -54,5 +54,37 @@ namespace Server.Data
 
             return addressDto;
         }
+        public async Task<AddressZipDto> GetAddressZipAsync(AddressZipParams addressZipParams)
+        {
+            // construct query
+            string query = "";
+            query = "<CityStateLookupRequest  USERID=\"445000006481\">";
+            query += "<ZipCode  ID=\"0\">";
+            query += "<Zip5>" + addressZipParams.Zip5 + "</Zip5>";
+            query += "<City>" + addressZipParams.City + "</City>";
+            query += "<State>" + addressZipParams.State + "</State>";
+            query += "</ZipCode>";
+            query += "</CityStateLookupRequest>";
+
+            // get results
+            var response = await _httpClient.GetAsync("ShippingAPI.dll?API=CityStateLookup&XML=" + query);
+            var result = await response.Content.ReadAsStringAsync();
+
+            // parse xml
+            var xml = XElement.Parse(result);
+            StringReader reader = new StringReader(xml.ToString());
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(CityStateLookupResponse));
+            var addressXml = (CityStateLookupResponse)xmlSerializer.Deserialize(reader)!;
+
+            // bind dto
+            var addressZipDto = new AddressZipDto()
+            {
+                City = addressXml.ZipCode!.City,
+                State = addressXml.ZipCode!.State,
+                Zip5 = addressXml.ZipCode!.Zip5
+            };
+
+            return addressZipDto;
+        }
     }
 }

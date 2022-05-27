@@ -31,6 +31,11 @@ export class NavMenuComponent {
       routerLink: '/account',
     },
     {
+      text: 'Sandbox',
+      icon: 'account_circle',
+      routerLink: '/sandbox',
+    },
+    {
       text: 'BAC',
       icon: 'folder',
       children: [

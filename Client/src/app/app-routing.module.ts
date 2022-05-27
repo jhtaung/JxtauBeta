@@ -10,6 +10,7 @@ import { AppealListComponent } from './pages/appeal-list/appeal-list.component';
 import { EformUserListComponent } from './pages/eform-user-list/eform-user-list.component';
 import { EformUserDetailComponent } from './pages/eform-user-detail/eform-user-detail.component';
 import { EformUspsAddressComponent } from './pages/eform-usps-address/eform-usps-address.component';
+import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'eform/users', component: EformUserListComponent },
   { path: 'eform/users/:id', component: EformUserDetailComponent },
   { path: 'eform/usps/address', component: EformUspsAddressComponent },
+  { path: 'sandbox', component: SandboxComponent },
+
   { path: 'error/test', component: TestErrorsComponent },
   { path: 'error/not-found', component: NotFoundComponent },
   { path: 'error/server', component: ServerErrorComponent },

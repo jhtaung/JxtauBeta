@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Server.Entities
+﻿namespace Server.Entities
 {
     public partial class Appeal
     {

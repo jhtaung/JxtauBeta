@@ -24,6 +24,7 @@ import { EformUserDetailComponent } from './pages/eform-user-detail/eform-user-d
 import { AccountComponent } from './pages/account/account.component';
 import { EformDocListComponent } from './pages/eform-doc-list/eform-doc-list.component';
 import { EformUspsAddressComponent } from './pages/eform-usps-address/eform-usps-address.component';
+import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EformUspsAddressComponent } from './pages/eform-usps-address/eform-usps
     EformUserDetailComponent,
     EformDocListComponent,
     EformUspsAddressComponent,
+    SandboxComponent,
   ],
   imports: [
     BrowserModule,

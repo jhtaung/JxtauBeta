@@ -1,6 +1,4 @@
 using AutoMapper;
-using Server.DTOs;
-using Server.Entities;
 
 namespace Server.Helpers
 {
@@ -8,7 +6,6 @@ namespace Server.Helpers
     {
         public AutoMapperProfiles()
         {
-            
         }
     }
 }

@@ -26,7 +26,8 @@ Angular - new project
 - ng add @angular/material
 - ng add @angular/cdk
 - ng g s weather –-skip-tests
-- ng g c _modules/page --module app
+- ng g c pages/page
+- ng g c modules/material --module app
 - ng g interceptor _interceptors/loading
 - ng g guard _guards/auth
 

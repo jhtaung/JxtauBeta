@@ -1,18 +1,52 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using Server.Interfaces;
 using Server.DTOs;
+using Server.Entities;
+using AutoMapper;
+using Server.Helpers;
+using Server.Params;
 
 namespace Server.Data
 {
     public class EformRepo : IEformRepo
     {
+        private readonly PorticoContext _context;
         private readonly HttpClient _httpClient;
-        public EformRepo(HttpClient httpClient)
+        private readonly IMapper _mapper;
+        public EformRepo(PorticoContext context, IMapper mapper, HttpClient httpClient)
         {
+            _context = context;
+            _mapper = mapper;
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("https://hondaati1.mpidom.mpi/");
             _httpClient.DefaultRequestHeaders.Add(
                 HeaderNames.Authorization, "Bearer c91fba83-6ad9-4d8b-9a72-f2db322efe88");
+        }
+
+        public async Task<PageList<EformDto>> GetEformListAsync(PageParams pageParams)
+        {
+            var query = 
+                from eforms in _context.TbEformSessionForms
+                where eforms.LogInfo!.EndsWith("PM") || eforms.LogInfo!.EndsWith("AM")
+                select new EformDto 
+                {
+                    Id = eforms.EFormSessionFormId,
+                    CreatedDate = eforms.CreatedDate,
+                    LastModifiedDate = eforms.LastModifiedDate,
+                    isSubmitted = eforms.IsSubmitted,
+                    Type = "",
+                    Log = eforms.LogInfo
+                };
+
+            query = query.AsQueryable();
+            query = query.OrderByDescending(x => x.CreatedDate);
+
+            return await PageList<EformDto>.CreateAsync(
+                query,
+                pageParams.PageNumber,
+                pageParams.PageSize
+            );
         }
 
         public async Task<EformResponse> GetUserListAsync()

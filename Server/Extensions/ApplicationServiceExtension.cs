@@ -16,7 +16,12 @@ namespace Server.Extensions
             {
                 options.UseSqlServer(config.GetConnectionString("AppealConnection"));
             });
-            
+
+            services.AddDbContext<PorticoContext>(options =>
+            {
+                options.UseSqlServer(config.GetConnectionString("PorticoConnection"));
+            });
+
             return services;
         }
     }
