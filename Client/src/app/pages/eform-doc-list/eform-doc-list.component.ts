@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './eform-doc-list.component.html',
   styleUrls: ['./eform-doc-list.component.css'],
 })
-export class EformDocListComponent implements OnInit {
+export class EformDocListComponent {
   isLoading: boolean = false;
   search: string = '';
 
@@ -17,8 +17,6 @@ export class EformDocListComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   doFilter(event: any) {}
 }

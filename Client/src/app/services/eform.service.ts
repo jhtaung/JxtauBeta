@@ -28,4 +28,12 @@ export class EformService {
   getAddress(address: Address) {
     return this.http.post<Address>(this.baseUrl + 'Address/Validate', address);
   }
+
+  getEforms() {
+    return this.http.get('assets/data/eforms.txt', { responseType: 'text' });
+  }
+
+  getEformsBot() {
+    return this.http.get('assets/data/eforms-bot.txt', { responseType: 'text' });
+  }
 }

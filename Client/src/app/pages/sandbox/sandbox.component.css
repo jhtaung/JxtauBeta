@@ -1,0 +1,9 @@
+.jh-log {
+  white-space: pre;
+  height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  border: 1px solid #3f51b5;
+  padding: 10px;
+  /* flex-direction: column-reverse; */
+}

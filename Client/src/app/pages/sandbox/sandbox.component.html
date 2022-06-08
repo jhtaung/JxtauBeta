@@ -1,5 +1,12 @@
 <div class="grid-container">
   <h1 class="mat-h1">Sandbox</h1>
-  <p>{{ input }}</p>
-  <p>{{ output }}</p>
+
+  <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="20px">
+    <div fxFlex>
+      <p class="jh-log">{{ input }}</p>
+    </div>
+    <div fxFlex>
+      <p class="jh-log">{{ output }}</p>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +18,7 @@ interface JxRowDto {
   templateUrl: './eform-user-detail.component.html',
   styleUrls: ['./eform-user-detail.component.css'],
 })
-export class EformUserDetailComponent implements OnInit {
+export class EformUserDetailComponent implements OnInit, AfterViewInit {
   id: string = '';
   error: string = '';
   isLoading = false;
