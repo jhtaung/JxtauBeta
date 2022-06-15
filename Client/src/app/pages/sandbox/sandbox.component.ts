@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppModule } from 'src/app/app.module';
 import { EformService } from 'src/app/services/eform.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class SandboxComponent implements OnInit {
     this.main();
     // this.pWordle();
     // this.pContacts();
-    this.pTree();
+    // this.pTree();
   }
 
   main() {
@@ -66,24 +65,12 @@ export class SandboxComponent implements OnInit {
       let temp = eformStr + dateStr + '.pdf';
       let tempTime = { date, name: eformDateStr + '\t\t' + temp };
 
-      // compare w/ prev minute as eforms db rounds up
-      let datePrev = new Date(date.valueOf() - 1 * 60000);
-      let hh = datePrev.getHours();
-      let mm = datePrev.getMinutes();
-      let ampm = hh > 12 ? 'PM' : 'AM';
-      hh = hh > 12 ? hh - 12 : hh;
-      let datePrevStr =
-        (datePrev.getMonth() + 1).toString() +
-        datePrev.getDate().toString() +
-        datePrev.getFullYear().toString() +
-        hh +
-        (mm < 10 ? '0' + mm : mm) +
-        ' ' +
-        ampm;
-      let eformPrev = eformStr + datePrevStr + '.pdf';
+      // compare w/ prev/next minute as eforms db rounds up
+      let eformPrev = this.jhDateAdd(eformStr, date, -1);
+      let eformNext = this.jhDateAdd(eformStr, date, 1);
 
       // bind
-      eformsBotArr.includes(temp) || eformsBotArr.includes(eformPrev)
+      eformsBotArr.some(r => [temp, eformPrev, eformNext].includes(r))
         ? found.push(tempTime)
         : missing.push(tempTime);
     }
@@ -157,6 +144,21 @@ export class SandboxComponent implements OnInit {
     for (let i = 0; i < eBotArr.length; i++) {
       this.output += eBotArr[i].name + '\n';
     }
+  }
+
+  private jhDateAdd(eform: string, date: Date, min: number) {
+    let dateAdj = new Date(date.valueOf() + min * 60000);
+    let hh = dateAdj.getHours();
+    let mm = dateAdj.getMinutes();
+    let dateAdjStr =
+      (dateAdj.getMonth() + 1).toString() +
+      dateAdj.getDate().toString() +
+      dateAdj.getFullYear().toString() +
+      (hh > 12 ? hh - 12 : hh) +
+      (mm < 10 ? '0' + mm : mm) +
+      ' ' +
+      (hh >= 12 ? 'PM' : 'AM');
+    return eform + dateAdjStr + '.pdf';
   }
 
   pWordle() {
