@@ -5,13 +5,12 @@ namespace Server.Extensions
     public static class QueryableExtensions
     {
         public static Expression<Func<T, bool>> MakePropertiesPredicate<T, TValue>(
-            Expression<Func<TValue, TValue, bool>> pattern, 
             TValue searchValue, 
+            Expression<Func<TValue, TValue, bool>> pattern, 
             bool isOr
         ) {
             var parameter = Expression.Parameter(typeof(T), "e");
             var searchExpr = Expression.Constant(searchValue);
-
             var predicateBody = typeof(T).GetProperties()
                 .Where(p => p.PropertyType == typeof(TValue))
                 .Select(p =>
@@ -22,7 +21,6 @@ namespace Server.Extensions
                     )
                 )
                 .Aggregate(isOr ? Expression.OrElse : Expression.AndAlso);
-
             return Expression.Lambda<Func<T, bool>>(predicateBody, parameter);
         }
 
@@ -32,7 +30,7 @@ namespace Server.Extensions
             Expression<Func<TValue, TValue, bool>> pattern, 
             bool isOr
         ) {
-            return query.Where(MakePropertiesPredicate<T, TValue>(pattern, searchValue, isOr));
+            return query.Where(MakePropertiesPredicate<T, TValue>(searchValue, pattern, isOr));
         }
 
         class ExpressionReplacer : ExpressionVisitor
