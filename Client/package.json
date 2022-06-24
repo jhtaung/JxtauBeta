@@ -26,6 +26,14 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
+  "overrides": {
+    "@angular/flex-layout": {
+      "@angular/cdk": "^14.0.0",
+      "@angular/common": "^14.0.0",
+      "@angular/core": "^14.0.0",
+      "@angular/platform-browser": "^14.0.0"
+    }
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~14.0.3",
     "@angular-eslint/builder": "14.0.0",
