@@ -11,10 +11,12 @@ import { AppealService } from 'src/app/services/appeal.service';
   templateUrl: './appeal-list.component.html',
   styleUrls: ['./appeal-list.component.css'],
 })
+
 export class AppealListComponent implements OnInit {
+  panelOpenState = false;
+
   isLoading = false;
   orderBy = '';
-  search: string = '';
   searchAfter: string = '';
   totalRows = 0;
   pageSize = 10;
@@ -63,9 +65,25 @@ export class AppealListComponent implements OnInit {
     this.appealParams.pageNumber = this.currentPage + 1;
     this.appealParams.pageSize = this.pageSize;
     this.appealParams.orderBy = this.orderBy;
-    this.appealParams.search = this.search;
-
     this.appealService.setAppealParams(this.appealParams);
+
+    this.appealService.postAppealList().subscribe({
+      next: response => {
+        console.log(response);
+        this.dataSource.data = response.result;
+        this.currentPage = response.page.currentPage - 1;
+        this.totalRows = response.page.totalItems;
+        this.searchAfter = this.appealParams.search;
+      },
+      error: error => {
+        console.log(error);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+
+    /*
     this.appealService.getAppealList(this.appealParams).subscribe({
       next: response => {
         console.log('response', response);
@@ -81,6 +99,7 @@ export class AppealListComponent implements OnInit {
         this.isLoading = false;
       },
     });
+    */
   }
 
   pageChanged(event: PageEvent) {

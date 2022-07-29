@@ -21,5 +21,13 @@ namespace Server.Controllers
             Response.AddPageHeader(appeals.CurrentPage, appeals.PageSize, appeals.TotalCount, appeals.TotalPages);
             return Ok(appeals);
         }
+
+        [HttpPost("List")]
+        public async Task<ActionResult<IEnumerable<AppealListDto>>> PostList(AppealParams appealParams)
+        {
+            var appeals = await _unitOfWork.AppealRepo.PostListAsync(appealParams);
+            Response.AddPageHeader(appeals.CurrentPage, appeals.PageSize, appeals.TotalCount, appeals.TotalPages);
+            return Ok(appeals);
+        }
     }
 }

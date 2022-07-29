@@ -27,3 +27,20 @@ export function getPageHeaders(pageNumber: number, pageSize: number) {
 
   return params;
 }
+
+export function postPageResult<T>(
+  http: HttpClient,
+  url: string,
+  params: any
+) {
+  const pageResult: PageResult<T> = new PageResult<T>();
+  return http.post<any>(url, params, { observe: 'response' as 'body' }).pipe(
+    map(response => {
+      pageResult.result = response.body!;
+      if (response.headers.get('Pagination') !== null) {
+        pageResult.page = JSON.parse(response.headers.get('Pagination')!);
+      }
+      return pageResult;
+    })
+  );
+}

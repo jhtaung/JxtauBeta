@@ -1,22 +1,151 @@
 <div class="grid-container">
   <h1 class="mat-h1">Appeals</h1>
 
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="panelOpenState"
+      style="margin-bottom: 30px">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Filter</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form class="jh-filter" (ngSubmit)="doFilter()">
+        <div fxLayout="row">
+          <mat-form-field fxFlex="20">
+            <input
+              matInput
+              type="text"
+              placeholder="Search"
+              name="search"
+              [(ngModel)]="appealParams.search" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="id"
+              name="id"
+              [(ngModel)]="appealParams.id" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="rap"
+              name="rap"
+              [(ngModel)]="appealParams.rap" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="dept"
+              name="dept"
+              [(ngModel)]="appealParams.dept" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="mpid"
+              name="mpid"
+              [(ngModel)]="appealParams.mpid" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="first name"
+              name="firstName"
+              [(ngModel)]="appealParams.firstName" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="last name"
+              name="lastName"
+              [(ngModel)]="appealParams.lastName" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px" style="margin-bottom: 20px">
+          <mat-form-field>
+            <mat-label>meeting</mat-label>
+            <input
+              matInput
+              [matDatepicker]="meetingPicker"
+              name="meeting"
+              [(ngModel)]="appealParams.meeting" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="meetingPicker"></mat-datepicker-toggle>
+            <mat-datepicker #meetingPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="status"
+              name="status"
+              [(ngModel)]="appealParams.status" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="updated user"
+              name="updatedUser"
+              [(ngModel)]="appealParams.updatedUser" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>updated date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="updatedPicker"
+              name="updatedDate"
+              [(ngModel)]="appealParams.updatedDate" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="updatedPicker"></mat-datepicker-toggle>
+            <mat-datepicker #updatedPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>received date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="receivePicker"
+              name="receivedDate"
+              [(ngModel)]="appealParams.receivedDate" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="receivePicker"></mat-datepicker-toggle>
+            <mat-datepicker #receivePicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="notes"
+              name="notes"
+              [(ngModel)]="appealParams.notes" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" style="margin-bottom: 20px">
+          <div>
+            <button mat-raised-button color="primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <div class="mat-elevation-z8">
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-
-    <form fxLayout fxLayoutGap="20px" class="jh-filter" (ngSubmit)="doFilter()">
-      <mat-form-field fxFlex="20">
-        <input
-          matInput
-          type="text"
-          placeholder="Search"
-          [(ngModel)]="search"
-          name="search" />
-      </mat-form-field>
-      <div fxFlex="10">
-        <button mat-raised-button color="primary">Search</button>
-      </div>
-    </form>
 
     <mat-paginator
       #paginator
@@ -37,7 +166,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ column.name }}
         </th>
-        <td mat-cell *matCellDef="let appeal">
+        <td mat-cell *matCellDef="let appeal" class="truncate-cell">
           <span
             *ngIf="column.attr === 'string'"
             [innerHTML]="appeal[column.key] | highlightSearch: searchAfter">

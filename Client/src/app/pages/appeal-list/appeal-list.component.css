@@ -20,7 +20,7 @@ th.mat-header-cell {
 }
 
 .jh-filter {
-  padding: 20px 0px 0px 20px;
+  padding: 0px 0px 0px 20px;
 }
 
 .mat-paginator {
@@ -30,4 +30,11 @@ th.mat-header-cell {
 
 .empty-dataset__hidden {
   display: none;
+}
+
+.truncate-cell {
+  max-width: 100px; /* feel free to include any other value */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

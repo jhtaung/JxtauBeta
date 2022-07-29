@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AppealList } from '../models/appeal-list';
 import { AppealParams } from '../models/appeal-params';
-import { getPageHeaders, getPageResult } from './page-helper';
+import { getPageHeaders, getPageResult, postPageResult } from './page-helper';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +28,6 @@ export class AppealService {
       appealParams.orderBy == ''
         ? params
         : params.append('orderby', appealParams.orderBy);
-    params =
-      appealParams.search == ''
-        ? params
-        : params.append('search', appealParams.search);
     return getPageResult<AppealList[]>(
       this.httpClient,
       this.baseUrl + 'Appeals/List',
@@ -44,6 +40,15 @@ export class AppealService {
         });
         return response;
       })
+    );
+  }
+
+  postAppealList() {
+    this.appealParams.build();
+    return postPageResult<AppealList[]>(
+      this.httpClient,
+      this.baseUrl + 'Appeals/List',
+      this.appealParams.apiModel
     );
   }
 }
